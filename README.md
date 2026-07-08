@@ -22,6 +22,19 @@ npx skills add moritztng/japanfold -g       # global: every project / new chat
 - Prefer not to use the installer? It's just a file — drop `SKILL.md` into your
   agent's skills directory (e.g. `~/.claude/skills/japanfold/SKILL.md`).
 
+### Claude Code plugin marketplace
+
+Claude Code users can also install it as a managed plugin (auto-updates via
+`/plugin marketplace update`):
+
+```bash
+claude plugin marketplace add moritztng/japanfold
+claude plugin install japanfold@japanfold
+```
+
+Restart Claude Code, then just ask it to fold or design. Same skill either way —
+the plugin tracks this repo, so `marketplace update` pulls new versions.
+
 **Claude Science** manages skills in-app (no installer): **Customize → Skills**,
 add from this repo (or paste `SKILL.md`) and **publish** it. Or skip install
 entirely — the API is public and self-describing, so just ask:
