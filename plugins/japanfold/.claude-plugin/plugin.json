@@ -1,6 +1,6 @@
 {
   "name": "japanfold",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Hosted biomolecular structure prediction & binder design via the JapanFold API (Boltz-2, ESMFold2, Protenix structure + affinity; BoltzGen binder design) — Tenstorrent-accelerated, free public HTTP API, no key or local GPU.",
   "author": {
     "name": "JapanFold",

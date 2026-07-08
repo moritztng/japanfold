@@ -53,10 +53,18 @@ JOB=$(curl -s -X POST $BASE/v1/predictions -H 'Content-Type: application/json' \
 #    `Prefer: wait=60` to the GET to block until the job finishes (up to 60s).
 curl -s $BASE/v1/jobs/$JOB          # -> {"status":"queued|running|succeeded|failed", ...}
 
-# 3. once status=succeeded: scores + artifact URLs, then download the bundle
-curl -s   $BASE/v1/jobs/$JOB/results
-curl -sOJ $BASE/v1/jobs/$JOB/archive          # zip: structures + results.json
+# 3. once status=succeeded: scores + artifact URLs, then download into a clear output dir
+OUT="./japanfold-mytarget"; mkdir -p "$OUT"        # a path you can name back to the user
+curl -s "$BASE/v1/jobs/$JOB/results" -o "$OUT/results.json"
+curl -s "$BASE/v1/jobs/$JOB/archive" -o "$OUT/output.zip" && unzip -oq "$OUT/output.zip" -d "$OUT"
+# -> then TELL the user the absolute path to $OUT and to each structure file.
 ```
+
+**Always save results to a clear directory and tell the user exactly where.** Server
+artifacts are retained only temporarily, so download them, put structures + `results.json`
+in a named folder (e.g. `./japanfold-<name>/`), and report the **absolute path(s)** to the
+user along with the key scores — never leave output only on the server or in an unstated
+temp dir.
 
 **Multi-chain complexes** (e.g. insulin's A+B chains) go in the `input` YAML —
 one `protein` entry per chain, not the bare `sequence` field:
@@ -107,7 +115,8 @@ way; `/v1/jobs/{id}/results` returns the ranked designs.
 and — for a prediction — per-target `rows` (`confidence_score`, `complex_plddt`,
 `iptm`, affinity fields); for a design, the ranked `designs`. Pass lines mirror
 Boltz-2: interface `iptm` > 0.5, fold `complex_plddt` > 0.7. Download a single
-structure from its artifact `url`, or the whole bundle from `…/archive`.
+structure from its artifact `url`, or the whole bundle from `…/archive` — into a
+named local directory, and tell the user the absolute path where you saved it.
 
 ## Limits & notes
 
