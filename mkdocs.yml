@@ -1,0 +1,57 @@
+site_name: JapanFold API
+site_description: JapanFold API documentation — free, public, Tenstorrent-accelerated protein structure prediction and binder design.
+site_url: https://docs.japanfold.com/
+repo_url: https://github.com/moritztng/japanfold
+repo_name: moritztng/japanfold
+edit_uri: edit/main/docs/
+
+nav:
+  - Overview: index.md
+  - Authentication: authentication.md
+  - Predictions: predictions.md
+  - Designs: designs.md
+  - Jobs: jobs.md
+  - Models & limits: models-and-limits.md
+  - Errors: errors.md
+  - Examples: examples.md
+  - The JapanFold skill: skill.md
+  - API reference: api.html
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: red
+      accent: red
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: red
+      accent: red
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.top
+    - content.code.copy
+    - search.suggest
+    - search.highlight
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - tables
+  - toc:
+      permalink: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/moritztng/japanfold
