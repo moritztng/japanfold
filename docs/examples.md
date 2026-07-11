@@ -30,7 +30,7 @@ curl -s $BASE/v1/jobs/$JOB/results
 curl -s $BASE/v1/jobs/$JOB/archive -o myprotein.zip && unzip -oq myprotein.zip -d myprotein
 ```
 
-### Python — stdlib only (no dependencies)
+### Python: stdlib only (no dependencies)
 
 ```python
 import json, time, urllib.request
@@ -68,7 +68,7 @@ with urllib.request.urlopen(req) as r, open("myprotein.zip", "wb") as f:
     f.write(r.read())
 ```
 
-### Python — httpx
+### Python: httpx
 
 ```python
 import time, httpx
@@ -119,7 +119,7 @@ curl -s $BASE/v1/jobs/$JOB/results
 curl -s $BASE/v1/jobs/$JOB/archive -o prot-ligand.zip
 ```
 
-### Python — httpx
+### Python: httpx
 
 ```python
 import time, httpx
@@ -177,7 +177,7 @@ curl -s $BASE/v1/jobs/$JOB/results
 curl -s $BASE/v1/jobs/$JOB/archive -o designs.zip && unzip -oq designs.zip -d designs
 ```
 
-### Python — httpx
+### Python: httpx
 
 ```python
 import time, httpx

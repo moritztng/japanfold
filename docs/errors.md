@@ -12,27 +12,27 @@ Errors are returned as **RFC 9457 problem+json**. The body looks like:
 }
 ```
 
-- `title` — short, human-readable summary.
-- `detail` — specific explanation of *this* failure (read this first).
-- `status` — the HTTP status, mirrored in the body.
-- `type` — a URI categorizing the error (may be `about:blank`).
-- `instance` — the request path that failed.
+- `title`: short, human-readable summary.
+- `detail`: specific explanation of *this* failure (read this first).
+- `status`: the HTTP status, mirrored in the body.
+- `type`: a URI categorizing the error (may be `about:blank`).
+- `instance`: the request path that failed.
 
 ## Status codes
 
 | Code | Meaning | What to do |
 |---|---|---|
-| `400` | Invalid request — bad params, malformed input, or over a size cap (residues, chains, designs, …). | Fix the request; read `detail`. See [Models & limits](models-and-limits.md). |
+| `400` | Invalid request: bad params, malformed input, or over a size cap (residues, chains, designs, …). | Fix the request; read `detail`. See [Models & limits](models-and-limits.md). |
 | `401` | Missing/invalid credentials for an authenticated action. | Check your `Authorization: Bearer` key. |
 | `403` | Forbidden. | See the Cloudflare note below if `detail` mentions error `1010`. |
-| `404` | No such job — or a job you don't own. | Check the id; jobs are scoped to their owner. |
-| `413` | Request body over 8 MB. | Shrink the input — you're almost certainly over `max_content_chars` anyway (see [Models & limits](models-and-limits.md)). |
+| `404` | No such job, or a job you don't own. | Check the id; jobs are scoped to their owner. |
+| `413` | Request body over 8 MB. | Shrink the input; you're almost certainly over `max_content_chars` anyway (see [Models & limits](models-and-limits.md)). |
 | `429` | At capacity or over a rate limit. | **Honor the `Retry-After` header**, then retry. See the limits page. |
 
 ## Handling 429 (at capacity)
 
-The service is a free demo on shared compute. When it is busy — or you exceed a
-submit/active-job quota — you get `429` with a `Retry-After` header (seconds).
+The service is a free demo on shared compute. When it is busy, or you exceed a
+submit/active-job quota, you get `429` with a `Retry-After` header (seconds).
 Wait that long and retry; back off if it repeats.
 
 ```bash

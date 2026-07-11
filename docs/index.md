@@ -1,7 +1,7 @@
 # JapanFold API
 
 Fold proteins, co-fold complexes with ligands (and get binding affinity), and
-design de-novo binders — over a **free, public, keyless HTTP API**. Boltz-2,
+design de-novo binders, over a **free, public, keyless HTTP API**. Boltz-2,
 ESMFold-2 and Protenix-v2 for structure prediction, BoltzGen for binder design.
 No API key, no local GPU, nothing to install.
 
@@ -32,7 +32,7 @@ Statuses: `queued` → `running` → `succeeded` | `failed` | `canceled`.
 ```bash
 BASE=https://api.japanfold.com
 
-# 1. submit — a bare `sequence` is the simplest input
+# 1. submit: a bare `sequence` is the simplest input
 JOB=$(curl -s -X POST $BASE/v1/predictions \
   -H 'Content-Type: application/json' \
   -d '{"model":"boltz2","name":"myprotein","sequence":"MKTAYIAKQRQISFVKSHFSRQLEERLGLIEVQ"}' \
@@ -46,25 +46,25 @@ curl -s $BASE/v1/jobs/$JOB/results
 curl -s $BASE/v1/jobs/$JOB/archive -o myprotein.zip && unzip -oq myprotein.zip -d myprotein
 ```
 
-That's the whole workflow. Everything else — complexes, ligands, affinity,
-binder design, model and parameter choice — is a variation on these calls.
+That's the whole workflow. Everything else (complexes, ligands, affinity,
+binder design, model and parameter choice) is a variation on these calls.
 
 ## Where to go next
 
 Read the guides in order, or jump to what you need:
 
-- **[Authentication](authentication.md)** — keyless by default; a Bearer key raises the limits.
-- **[Predictions](predictions.md)** — input shapes, models, co-folding, affinity, params.
-- **[Designs](designs.md)** — BoltzGen binder design.
-- **[Jobs](jobs.md)** — polling, listing, cancel/delete, results, logs, artifacts, archive.
-- **[Models & limits](models-and-limits.md)** — the model list, every parameter, and the caps.
-- **[Errors](errors.md)** — the problem+json shape and the status codes.
-- **[Examples](examples.md)** — end-to-end fold, co-fold+affinity and design in curl and Python.
-- **[The JapanFold skill](skill.md)** — fold and design straight from your AI agent.
+- **[Authentication](authentication.md)**: keyless by default; a Bearer key raises the limits.
+- **[Predictions](predictions.md)**: input shapes, models, co-folding, affinity, params.
+- **[Designs](designs.md)**: BoltzGen binder design.
+- **[Jobs](jobs.md)**: polling, listing, cancel/delete, results, logs, artifacts, archive.
+- **[Models & limits](models-and-limits.md)**: the model list, every parameter, and the caps.
+- **[Errors](errors.md)**: the problem+json shape and the status codes.
+- **[Examples](examples.md)**: end-to-end fold, co-fold+affinity and design in curl and Python.
+- **[The JapanFold skill](skill.md)**: fold and design straight from your AI agent.
 
 ## A note on network egress
 
 Some environments sandbox outbound HTTP. If so, allow the host
 **`api.japanfold.com`**. If a request ever returns HTTP `403` with Cloudflare
-error `1010`, that is edge bot-filtering of your HTTP client, not an API error —
-retry with a browser-like `User-Agent` header.
+error `1010`, that is edge bot-filtering of your HTTP client, not an API error.
+Retry with a browser-like `User-Agent` header.

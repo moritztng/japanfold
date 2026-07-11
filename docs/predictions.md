@@ -1,14 +1,14 @@
 # Predictions
 
-`POST /v1/predictions` predicts the 3D structure — and, with Boltz-2, the
-binding affinity — of a protein or complex. It returns a **job** to poll (see
+`POST /v1/predictions` predicts the 3D structure (and, with Boltz-2, the
+binding affinity) of a protein or complex. It returns a **job** to poll (see
 [Jobs](jobs.md)).
 
 ## Three ways to specify input
 
 Pick whichever fits. You provide **one** of these:
 
-### 1. `sequence` — a single protein chain (simplest)
+### 1. `sequence`: a single protein chain (simplest)
 
 ```bash
 curl -s -X POST https://api.japanfold.com/v1/predictions \
@@ -16,7 +16,7 @@ curl -s -X POST https://api.japanfold.com/v1/predictions \
   -d '{"model":"boltz2","name":"myprotein","sequence":"MKTAYIAKQRQISFVKSHFSRQLEE"}'
 ```
 
-### 2. `input` — one FASTA or Boltz YAML string
+### 2. `input`: one FASTA or Boltz YAML string
 
 Use this for **complexes, multiple chains, ligands, nucleic acids, affinity and
 constraints**. The string is a full [Boltz](https://github.com/jwohlwend/boltz)
@@ -32,7 +32,7 @@ curl -s -X POST https://api.japanfold.com/v1/predictions \
   }'
 ```
 
-### 3. `targets` — a list, to fold many inputs in one job
+### 3. `targets`: a list, to fold many inputs in one job
 
 Each target is `{ "content": "<FASTA or YAML>", "name": "<optional>" }`.
 
@@ -57,7 +57,7 @@ the full capability matrix.
 |---|---|
 | `boltz2` | The default and most capable. Proteins, DNA, RNA, ligands, **affinity**, constraints. Uses an MSA by default. |
 | `esmfold2` | Language-model folding, proteins only. Fast; MSA optional. |
-| `esmfold2-fast` | ESMFold-2 tuned for throughput — always single-sequence. For screening many sequences. |
+| `esmfold2-fast` | ESMFold-2 tuned for throughput, always single-sequence. For screening many sequences. |
 | `protenix-v2` | AlphaFold3-family (Pairformer + atom diffusion). Complexes, PAE/PDE output. No affinity. |
 
 Only Boltz-2 does affinity, constraints and potentials. ESMFold-2 is protein-only.
@@ -112,7 +112,7 @@ curl -s -X POST https://api.japanfold.com/v1/predictions \
 By default a submit returns immediately with a job to poll. Add
 `Prefer: wait=<seconds>` (also accepted on the `POST /v1/predictions` itself, or
 on a **`GET /v1/jobs/{id}`** poll) to block until the job finishes or the
-timeout elapses — turning poll loops into one call for short jobs. `wait` alone
+timeout elapses, turning poll loops into one call for short jobs. `wait` alone
 holds for 25s; `wait=N` holds up to `N` seconds, capped at 60:
 
 ```bash
@@ -123,7 +123,7 @@ curl -s -H 'Prefer: wait=60' https://api.japanfold.com/v1/jobs/$JOB
 
 Send an `Idempotency-Key: <unique>` header on a create. A retried submit with
 the same key (and same caller) returns the original job instead of launching a
-duplicate — useful when a client retries on a dropped connection:
+duplicate. Useful when a client retries on a dropped connection:
 
 ```bash
 curl -s -X POST https://api.japanfold.com/v1/predictions \
@@ -133,7 +133,7 @@ curl -s -X POST https://api.japanfold.com/v1/predictions \
 
 ## Response
 
-`202`-style body is a **Job** object — `id`, `status`, `kind: "predict"`,
+`202`-style body is a **Job** object: `id`, `status`, `kind: "predict"`,
 `model`, timestamps and a `links` map. Poll `links.self` (or
 `/v1/jobs/{id}`) and read `/v1/jobs/{id}/results` when `results_ready` is true.
 See [Jobs](jobs.md) for the full lifecycle and result shape.

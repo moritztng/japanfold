@@ -1,7 +1,7 @@
 # The JapanFold skill
 
 Prefer to fold and design straight from your AI agent instead of writing HTTP
-calls? Install the **JapanFold skill** — a single [`SKILL.md`](https://github.com/moritztng/japanfold/blob/master/SKILL.md)
+calls? Install the **JapanFold skill**: a single [`SKILL.md`](https://github.com/moritztng/japanfold/blob/master/SKILL.md)
 built on the open [Agent Skills](https://agentskills.io) standard. It teaches
 your agent the API so you can just ask, in plain language, to fold or design.
 
@@ -16,7 +16,7 @@ npx skills add moritztng/japanfold -g       # global: every project / new chat
 ```
 
 - Target specific agents: `-a claude-code`, `-a cursor`, `-a codex`, `-a '*'` (all).
-- No installer? It's just a file — drop `SKILL.md` into your agent's skills
+- No installer? It's just a file. Drop `SKILL.md` into your agent's skills
   directory (e.g. `~/.claude/skills/japanfold/SKILL.md`).
 
 ### Claude Code plugin marketplace
@@ -32,7 +32,7 @@ Restart Claude Code, then just ask it to fold or design.
 
 ### Claude Science
 
-Manage skills in-app — no installer. **Customize → Skills**, add from the
+Manage skills in-app, no installer. **Customize → Skills**, add from the
 [repo](https://github.com/moritztng/japanfold) (or paste `SKILL.md`), and
 **publish**. If egress is sandboxed, approve the host `api.japanfold.com`.
 

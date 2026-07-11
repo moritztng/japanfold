@@ -1,6 +1,6 @@
 # Models & limits
 
-The live, machine-readable version of this page is `GET /v1/models` — it returns
+The live, machine-readable version of this page is `GET /v1/models`. It returns
 the model list, every parameter with its default/range, the design protocols, and
 the current numeric limits. The tables below mirror it; if they ever disagree,
 **trust the live endpoint**.
@@ -16,17 +16,17 @@ if you just need to know the service is up.
 
 | `id` | Name | MSA | Ligands | Nucleic acids | Affinity | Constraints | PAE/PDE |
 |---|---|:-:|:-:|:-:|:-:|:-:|:-:|
-| `boltz2` | Boltz-2 | default on | ✓ | ✓ | ✓ | ✓ | — |
-| `esmfold2` | ESMFold-2 | optional | — | — | — | — | — |
-| `esmfold2-fast` | ESMFold-2 Fast | single-seq only | — | — | — | — | — |
-| `protenix-v2` | Protenix-v2 | default on | ✓ | ✓ | — | — | ✓ |
+| `boltz2` | Boltz-2 | default on | ✓ | ✓ | ✓ | ✓ | - |
+| `esmfold2` | ESMFold-2 | optional | - | - | - | - | - |
+| `esmfold2-fast` | ESMFold-2 Fast | single-seq only | - | - | - | - | - |
+| `protenix-v2` | Protenix-v2 | default on | ✓ | ✓ | - | - | ✓ |
 
-- **Boltz-2** — most capable; choose it when in doubt, or whenever you need
+- **Boltz-2**: most capable; choose it when in doubt, or whenever you need
   ligands, nucleic acids, affinity or constraints.
-- **ESMFold-2 / ESMFold-2 Fast** — language-model folding, protein chains only.
+- **ESMFold-2 / ESMFold-2 Fast**: language-model folding, protein chains only.
   Fast, lightweight; `-fast` is always single-sequence, for screening many
   sequences at once.
-- **Protenix-v2** — AlphaFold3-family (Pairformer + atom diffusion), strong at
+- **Protenix-v2**: AlphaFold3-family (Pairformer + atom diffusion), strong at
   antibody–antigen. Emits PAE/PDE and per-atom pLDDT. For affinity, use Boltz-2.
 
 ## Prediction parameters
@@ -35,8 +35,8 @@ Sent as `params` on `POST /v1/predictions`. Out-of-range values are clamped.
 
 | Key | Type | Default | Range | Notes |
 |---|---|---|---|---|
-| `use_msa_server` | bool | `true` | — | Build an MSA. Required for Boltz-2/Protenix; optional for ESMFold-2. |
-| `fast` | bool | `true` | — | Higher throughput, may be slightly less accurate. |
+| `use_msa_server` | bool | `true` | - | Build an MSA. Required for Boltz-2/Protenix; optional for ESMFold-2. |
+| `fast` | bool | `true` | - | Higher throughput, may be slightly less accurate. |
 | `recycling_steps` | int | `3` | 1–10 | More can improve accuracy, slower. |
 | `sampling_steps` | int | `200` | 10–500 | Diffusion steps per structure. |
 | `diffusion_samples` | int | `1` | 1–5 | Structures generated per target. |
@@ -52,7 +52,7 @@ Protocols for `POST /v1/designs`: `protein-anything`, `peptide-anything`,
 |---|---|---|---|---|
 | `num_designs` | int | `10` | 1–10 | Binders to generate before filtering. |
 | `budget` | int | `10` | 1–10 | Top ranked designs to keep after filtering. |
-| `fast` | bool | `true` | — | Higher throughput, may be slightly less accurate. |
+| `fast` | bool | `true` | - | Higher throughput, may be slightly less accurate. |
 
 ## Limits (free tier)
 

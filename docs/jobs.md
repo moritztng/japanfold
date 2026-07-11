@@ -34,8 +34,8 @@ curl -s https://api.japanfold.com/v1/jobs/$JOB
 ```
 
 Add `Prefer: wait=<seconds>` to block until the job finishes (or the timeout
-elapses, capped at 60s; bare `wait` holds 25s) instead of returning immediately
-— handy for short jobs:
+elapses, capped at 60s; bare `wait` holds 25s) instead of returning immediately,
+handy for short jobs:
 
 ```bash
 curl -s -H 'Prefer: wait=60' https://api.japanfold.com/v1/jobs/$JOB
@@ -100,12 +100,12 @@ A **prediction** result:
 }
 ```
 
-- `rows` — one row per target, with confidence scores. Fields depend on the
+- `rows`: one row per target, with confidence scores. Fields depend on the
   model and inputs: `plddt`/`complex_plddt`, `ptm`/`iptm`, and (Boltz-2 affinity
   runs) affinity fields. A rough read: interface `iptm` > 0.5, fold
   `complex_plddt` > 0.7.
 - A **design** result carries the ranked `designs` instead of `rows`.
-- `artifacts[].url` and `archive_url` are paths under the base URL — prefix them
+- `artifacts[].url` and `archive_url` are paths under the base URL. Prefix them
   with `https://api.japanfold.com`.
 
 ## Download artifacts
@@ -125,7 +125,7 @@ unzip -oq results.zip -d results
 
 ## Logs
 
-Plain-text run log — useful while a job runs or to debug a failure:
+Plain-text run log, useful while a job runs or to debug a failure:
 
 ```bash
 curl -s https://api.japanfold.com/v1/jobs/$JOB/logs

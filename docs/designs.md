@@ -18,11 +18,11 @@ curl -s -X POST https://api.japanfold.com/v1/designs \
   }'
 ```
 
-- **`spec`** (required) — a YAML design spec: the target plus the binder request.
+- **`spec`** (required): a YAML design spec, the target plus the binder request.
   Same YAML dialect as the Boltz/BoltzGen inputs.
-- **`protocol`** — what to design (see below). 
-- **`name`** — optional label.
-- **`params`** — see below.
+- **`protocol`**: what to design (see below).
+- **`name`**: optional label.
+- **`params`**: see below.
 
 ## Protocols
 
@@ -41,12 +41,12 @@ curl -s -X POST https://api.japanfold.com/v1/designs \
 |---|---|---|---|---|
 | `num_designs` | int | 10 | 1–10 | Binders to generate before filtering. |
 | `budget` | int | 10 | 1–10 | Top ranked designs to keep after filtering. |
-| `fast` | bool | true | — | Higher throughput, may be slightly less accurate. |
+| `fast` | bool | true | - | Higher throughput, may be slightly less accurate. |
 
 (Free-tier ranges; see [Models & limits](models-and-limits.md).)
 
 Submits accept the same `Idempotency-Key` and `Prefer: wait` headers as
-predictions — see [Predictions](predictions.md#retrying-safely-idempotency-key).
+predictions. See [Predictions](predictions.md#retrying-safely-idempotency-key).
 
 ## Reading designs
 
