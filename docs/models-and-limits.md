@@ -54,10 +54,11 @@ Protocols for `POST /v1/designs`: `protein-anything`, `peptide-anything`,
 | `budget` | int | `10` | 1–10 | Top ranked designs to keep after filtering. |
 | `fast` | bool | `true` | - | Higher throughput, may be slightly less accurate. |
 
-## Limits (free tier)
+## Limits (free public demo)
 
-This is a free public demo on shared compute, so inputs and concurrency are
-capped. The full platform has no such limits.
+JapanFold is a free, public demo running on shared compute. These are the
+current limits on structure/design size and concurrency, in place to keep it
+fair and available for everyone.
 
 **Per structure / complex**
 

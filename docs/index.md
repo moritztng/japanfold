@@ -53,7 +53,7 @@ binder design, model and parameter choice) is a variation on these calls.
 
 Read the guides in order, or jump to what you need:
 
-- **[Authentication](authentication.md)**: keyless by default; a Bearer key raises the limits.
+- **[Authentication](authentication.md)**: keyless by default; an optional Bearer key scopes jobs to you instead of your IP.
 - **[Predictions](predictions.md)**: input shapes, models, co-folding, affinity, params.
 - **[Designs](designs.md)**: BoltzGen binder design.
 - **[Jobs](jobs.md)**: polling, listing, cancel/delete, results, logs, artifacts, archive.

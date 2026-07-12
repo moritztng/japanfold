@@ -9,11 +9,10 @@ Just send the request. This is the same access the web app at
 curl -s https://api.japanfold.com/v1/models
 ```
 
-## Optional API key: raised limits
+## Optional API key: ownership
 
-Send a key of the form `jf_live_…` to lift the free-tier caps (larger
-structures, more chains, more jobs at once), as `Authorization: Bearer` or
-`X-API-Key`:
+Send a key of the form `jf_live_…` as `Authorization: Bearer` or `X-API-Key`
+to own your jobs under the key instead of your IP/session:
 
 ```bash
 curl -s https://api.japanfold.com/v1/predictions \
@@ -23,17 +22,18 @@ curl -s https://api.japanfold.com/v1/predictions \
 ```
 
 A key that's present but invalid is rejected with `401`. Omit the header
-entirely to fall back to the public tier. Keys are issued by the JapanFold
-team; there's no self-serve signup yet.
+entirely and requests are scoped to your IP/session instead. Keys are issued
+by the JapanFold team; there's no self-serve signup yet.
 
 ## Ownership and quotas
 
 - **Keyless requests** are grouped and rate-limited per client IP (and per
-  session for the web app). This is a free demo on shared compute, so there are
-  quotas on how much you can run at once.
-- **Keyed requests** are owned by your key. You can only list, poll, cancel or
-  delete jobs that belong to you (your IP/session for keyless use, your key
-  otherwise). Accessing someone else's job returns `404`.
+  session for the web app). JapanFold is a free public demo on shared compute,
+  so there are quotas on how much you can run at once — the same quotas for
+  everyone, key or no key.
+- **Keyed requests** are owned by your key instead. You can only list, poll,
+  cancel or delete jobs that belong to you (your IP/session for keyless use,
+  your key otherwise). Accessing someone else's job returns `404`.
 - The concrete numbers (active-job quotas, submit rates, structure/design size
   caps) are in **[Models & limits](models-and-limits.md)** and, live, at
   `GET /v1/models`.

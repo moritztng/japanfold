@@ -125,7 +125,7 @@ named local directory, and tell the user the absolute path where you saved it.
   plus per-IP rate limits. Over a cap → `400`; at capacity → `429` (respect
   `Retry-After`). Numeric params are clamped to range.
 - Errors are RFC 9457 problem+json (`title`, `detail`).
-- No key needed; an optional `Authorization: Bearer <key>` raises the limits.
+- No key needed; an optional `Authorization: Bearer <key>` scopes jobs to you instead of your IP.
 - Full machine-readable contract: `GET /v1/openapi.json`.
 - **If a request ever returns HTTP `403` with Cloudflare error `1010`**, that's
   edge-level bot filtering of your HTTP client, not an API error — retry the same

@@ -43,7 +43,7 @@ curl -s -X POST https://api.japanfold.com/v1/designs \
 | `budget` | int | 10 | 1–10 | Top ranked designs to keep after filtering. |
 | `fast` | bool | true | - | Higher throughput, may be slightly less accurate. |
 
-(Free-tier ranges; see [Models & limits](models-and-limits.md).)
+(See [Models & limits](models-and-limits.md) for the current ranges.)
 
 Submits accept the same `Idempotency-Key` and `Prefer: wait` headers as
 predictions. See [Predictions](predictions.md#retrying-safely-idempotency-key).
