@@ -45,6 +45,8 @@ Once installed, ask in plain language:
 > *"Co-fold this protein with aspirin and estimate the binding affinity."*
 >
 > *"Design 10 nanobody binders against this target."*
+>
+> *"Embed these sequences with ESMC-600M and save the pooled vectors."*
 
 Or invoke it explicitly where supported: `/japanfold`.
 

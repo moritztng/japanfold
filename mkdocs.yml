@@ -10,6 +10,7 @@ nav:
   - Authentication: authentication.md
   - Predictions: predictions.md
   - Designs: designs.md
+  - Embeddings: embeddings.md
   - Jobs: jobs.md
   - Models & limits: models-and-limits.md
   - Errors: errors.md

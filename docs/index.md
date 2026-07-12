@@ -1,9 +1,10 @@
 # JapanFold API
 
-Fold proteins, co-fold complexes with ligands (and get binding affinity), and
-design de-novo binders, over a **free, public, keyless HTTP API**. Boltz-2,
-ESMFold-2 and Protenix-v2 for structure prediction, BoltzGen for binder design.
-No API key, no local GPU, nothing to install.
+Fold proteins, co-fold complexes with ligands (and get binding affinity),
+design de-novo binders, and compute protein embeddings, over a **free, public,
+keyless HTTP API**. Boltz-2, ESMFold-2 and Protenix-v2 for structure
+prediction, BoltzGen for binder design, ESMC for embeddings. No API key, no
+local GPU, nothing to install.
 
 ```
 Base URL   https://api.japanfold.com
@@ -56,6 +57,7 @@ Read the guides in order, or jump to what you need:
 - **[Authentication](authentication.md)**: keyless by default; an optional Bearer key scopes jobs to you instead of your IP.
 - **[Predictions](predictions.md)**: input shapes, models, co-folding, affinity, params.
 - **[Designs](designs.md)**: BoltzGen binder design.
+- **[Embeddings](embeddings.md)**: ESMC protein embeddings (per-residue + pooled).
 - **[Jobs](jobs.md)**: polling, listing, cancel/delete, results, logs, artifacts, archive.
 - **[Models & limits](models-and-limits.md)**: the model list, every parameter, and the caps.
 - **[Errors](errors.md)**: the problem+json shape and the status codes.

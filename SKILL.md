@@ -5,12 +5,14 @@ description: >-
   Protenix) and design de-novo binders/proteins (BoltzGen) via JapanFold — a
   free, public, Tenstorrent-accelerated HTTP API. Use to fold a protein or
   complex, co-fold a protein with a ligand and get affinity, design
-  nanobody/antibody/peptide/miniprotein binders against a target, or turn a
-  sequence into a PDB/mmCIF structure. No API key or local GPU needed.
+  nanobody/antibody/peptide/miniprotein binders against a target, turn a
+  sequence into a PDB/mmCIF structure, or compute ESMC protein embeddings
+  (per-residue + pooled vectors). No API key or local GPU needed.
 when_to_use: >-
   When the user wants to fold/predict a protein or complex structure, estimate
-  protein–ligand binding affinity, or design binders against a target — and a
-  hosted service is fine (no local model to run).
+  protein–ligand binding affinity, design binders against a target, or compute
+  protein language-model embeddings — and a hosted service is fine (no local
+  model to run).
 license: Apache-2.0
 category: biomodels
 metadata:
@@ -108,6 +110,24 @@ curl -s -X POST $BASE/v1/designs -H 'Content-Type: application/json' \
 Protocols: `protein-anything`, `peptide-anything`, `nanobody-anything`,
 `antibody-anything`, `protein-small_molecule`, `protein-redesign`. Poll the same
 way; `/v1/jobs/{id}/results` returns the ranked designs.
+
+## Embed sequences (ESMC)
+
+Turn protein sequences into language-model vectors — no structure, no MSA. Same
+submit → poll → download flow:
+
+```bash
+curl -s -X POST $BASE/v1/embeddings -H 'Content-Type: application/json' \
+  -d '{"model":"esmc-600m","sequence":"MKTAYIAKQRQISFVKSHFSRQLEE"}'
+# or many at once: "sequences":[{"id":"a","sequence":"..."},{"id":"b","sequence":"..."}]
+```
+
+- **Models:** `esmc-300m`, `esmc-600m` (default), `esmc-6b` — larger is a stronger
+  representation at more compute.
+- `params`: `pool` (`mean`/`max`/`cls`, default `mean`), `format` (`npz` = per-residue
+  `[L, d_model]` + pooled `[d_model]` per sequence; `parquet` = pooled table only), `fast`.
+- Results carry `kind: "embed"`, `d_model`, a `sequences` list and `artifacts` URLs;
+  download the `.npz`/`.parquet` files into a named dir and tell the user the path.
 
 ## Reading results
 

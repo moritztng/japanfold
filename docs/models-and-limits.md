@@ -29,6 +29,17 @@ if you just need to know the service is up.
 - **Protenix-v2**: AlphaFold3-family (Pairformer + atom diffusion), strong at
   antibody–antigen. Emits PAE/PDE and per-atom pLDDT. For affinity, use Boltz-2.
 
+### Embedding models
+
+`POST /v1/embeddings` uses the ESMC protein language model. Larger is a stronger
+representation at more compute per sequence. See [Embeddings](embeddings.md).
+
+| `id` | Name | Notes |
+|---|---|---|
+| `esmc-300m` | ESMC 300M | Quickest; strong general-purpose representation. |
+| `esmc-600m` | ESMC 600M | The balanced default. |
+| `esmc-6b` | ESMC 6B | Strongest representation, highest compute cost. |
+
 ## Prediction parameters
 
 Sent as `params` on `POST /v1/predictions`. Out-of-range values are clamped.
@@ -54,6 +65,16 @@ Protocols for `POST /v1/designs`: `protein-anything`, `peptide-anything`,
 | `budget` | int | `10` | 1–10 | Top ranked designs to keep after filtering. |
 | `fast` | bool | `true` | - | Higher throughput, may be slightly less accurate. |
 
+## Embedding parameters
+
+Sent as `params` on `POST /v1/embeddings`.
+
+| Key | Type | Default | Range | Notes |
+|---|---|---|---|---|
+| `pool` | enum | `mean` | `mean`, `max`, `cls` | How per-residue vectors combine into one pooled vector. |
+| `format` | enum | `npz` | `npz`, `parquet` | `npz`: per-residue + pooled per sequence. `parquet`: pooled table only. |
+| `fast` | bool | `false` | - | Higher throughput, may be slightly less precise. |
+
 ## Limits (free public demo)
 
 JapanFold is a free, public demo running on shared compute. These are the
@@ -77,6 +98,13 @@ fair and available for everyone.
 |---|---|
 | `max_designs` | 10 |
 | `max_budget` | 10 |
+
+**Embeddings**
+
+| Limit | Value |
+|---|---|
+| `max_embed_sequences` (per submission) | 50 |
+| `max_embed_sequence_residues` (per sequence) | 2000 |
 
 **Parameter ceilings**
 
@@ -105,6 +133,8 @@ fair and available for everyone.
 | `max_runtime_design_s` | 2700 |
 | `max_stall_s` (predict) | 600 |
 | `max_stall_design_s` | 1200 |
+| `max_runtime_embed_s` | 300 |
+| `max_stall_embed_s` | 120 |
 
 Exceed a size cap → `400`. At capacity / over a rate limit → `429` with
 `Retry-After`. See [Errors](errors.md).
