@@ -59,8 +59,10 @@ the full capability matrix.
 | `esmfold2` | Language-model folding, proteins only. Fast; MSA optional. |
 | `esmfold2-fast` | ESMFold-2 tuned for throughput, always single-sequence. For screening many sequences. |
 | `protenix-v2` | AlphaFold3-family (Pairformer + atom diffusion). Complexes, PAE/PDE output. No affinity. |
+| `opendde` | OpenDDE general checkpoint. Protein complexes, MSA on by default. Protein-only, no affinity. |
+| `opendde-abag` | OpenDDE antibody-antigen checkpoint. Co-fold an antibody Fab with its antigen. Same limits as `opendde`; accuracy matches the reference (strong on standard Ab-Ag, weaker on some hard targets). |
 
-Only Boltz-2 does affinity, constraints and potentials. ESMFold-2 is protein-only.
+Only Boltz-2 does affinity, constraints and potentials. ESMFold-2 and OpenDDE are protein-only.
 
 ## Co-folding with a ligand + affinity (Boltz-2)
 

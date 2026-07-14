@@ -2,7 +2,7 @@
 
 Fold proteins, co-fold complexes with ligands (and get binding affinity),
 design de-novo binders, and compute protein embeddings, over a **free, public,
-keyless HTTP API**. Boltz-2, ESMFold-2 and Protenix-v2 for structure
+keyless HTTP API**. Boltz-2, ESMFold-2, Protenix-v2 and OpenDDE for structure
 prediction, BoltzGen for binder design, ESMC for embeddings. No API key, no
 local GPU, nothing to install.
 
