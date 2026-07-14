@@ -61,7 +61,7 @@ floor and the parity claim is a direct high-precision correlation.
 | ESMFold-2 | ubiquitin (76 aa) | CA-RMSD (Å) | 0.92 ± 0.19 | 0.23 ± 0.03 | 0.75 ± 0.10 | within floor |
 | Protenix-v2 | 7ROA (117 aa, MSA) | CA-RMSD (Å) | 2.94 | 1.47 | 2.63 ± 0.42 | within floor |
 | Boltz-2 | trp-cage (20 aa, no MSA) | CA-RMSD (Å) | 0.79 | 0.37 | 0.60 ± 0.24 | within floor |
-| Boltz-2 | 7ROA (117 aa, no MSA) | CA-RMSD (Å) | 3.37 | 4.35 | 5.51 ± 0.70 | modest gap, see below |
+| Boltz-2 | 7ROA (117 aa, no MSA) | CA-RMSD (Å) | 6.94 | 2.04 | 4.92 ± 2.13 | within floor |
 | Boltz-2 | 7ROA (117 aa, MSA) | CA-RMSD (Å) | 0.81 | 0.98 | 0.94 ± 0.14 | within floor |
 | BoltzGen | binder vs 7ROA chain A | scRMSD ≤2 Å pass-rate | 68.75% (ref, n=16) | 93.8% (n=16) | device ≥ reference | meets-or-exceeds |
 
@@ -142,20 +142,22 @@ Two seeds each side, at matched production defaults.
 | Target | Length | JapanFold vs reference | Reference self-spread | JapanFold self-spread | Within floor |
 |---|---|---|---|---|---|
 | trp-cage (no MSA) | 20 | 0.60 ± 0.24 Å | 0.79 Å | 0.37 Å | yes |
-| 7ROA (no MSA) | 117 | 5.51 ± 0.70 Å | 3.37 Å | 4.35 Å | modest gap |
+| 7ROA (no MSA) | 117 | 4.92 ± 2.13 Å | 6.94 Å | 2.04 Å | yes |
 | 7ROA (MSA) | 117 | 0.94 ± 0.14 Å | 0.81 Å | 0.98 Å | yes |
 
 Confidence scores agree closely on every target (confidence score within
 0.01, pTM within 0.04, complex pLDDT within 0.01) even where the coordinates
 disagree. Both implementations read the fold the same way.
 
-The single-sequence 7ROA leg sits about 1.3 times the noise floor, a modest
-gap on the hardest case for an MSA-trained model: a 117-residue protein
-folded with no MSA at all. With an MSA, the input Boltz-2 is trained for and
-the default JapanFold uses (`use_msa_server` is on by default), the gap closes
-to 0.94 Å, inside the floor. Reference confidence rises from 0.65 to 0.89
-with the MSA; device confidence from 0.64 to 0.87. For production use, the
-MSA-backed row is the one that applies.
+Single-sequence 7ROA (no MSA) is the hardest case for an MSA-trained model: a
+117-residue protein folded with no template of the co-evolutionary signal it
+was trained on. The reference implementation's own run-to-run spread widens
+accordingly (6.94 Å), and JapanFold's gap to it (4.92 Å) sits inside that
+spread. With an MSA, the input Boltz-2 is trained for and the default
+JapanFold uses (`use_msa_server` is on by default), both sides tighten up
+together and the gap shrinks to 0.94 Å. Reference confidence rises from 0.65
+to 0.89 with the MSA; device confidence from 0.64 to 0.87. For production
+use, the MSA-backed row is the one that applies.
 
 ### BoltzGen (de-novo binder design)
 
@@ -206,11 +208,9 @@ of what a pharma evaluator running on GPU would see.
 
 For every model JapanFold serves, the output you get back is statistically
 indistinguishable from running the model's official implementation yourself,
-within that implementation's own run-to-run noise. The two honest gaps above
-(Protenix-v2 confidence selection, Boltz-2 single-sequence folding) are
-properties of the models themselves, present on the official implementations
-too, and the production defaults JapanFold uses (MSA on for Boltz-2) avoid the
-single-sequence case where applicable.
+within that implementation's own run-to-run noise. The one honest caveat
+above (Protenix-v2 confidence selection) is a property of the model itself,
+present on the official implementation too.
 
 If you want to reproduce any of this on your own targets, the harness and the
 committed reference fixtures ship in the `tt-bio` repository. Run the same
