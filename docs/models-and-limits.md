@@ -20,6 +20,8 @@ if you just need to know the service is up.
 | `esmfold2` | ESMFold-2 | optional | - | - | - | - | - |
 | `esmfold2-fast` | ESMFold-2 Fast | single-seq only | - | - | - | - | - |
 | `protenix-v2` | Protenix-v2 | default on | ✓ | ✓ | - | - | ✓ |
+| `opendde` | OpenDDE — General | default on | - | - | - | - | - |
+| `opendde-abag` | OpenDDE — Antibody-Antigen | default on | - | - | - | - | - |
 
 - **Boltz-2**: most capable; choose it when in doubt, or whenever you need
   ligands, nucleic acids, affinity or constraints.
@@ -28,6 +30,15 @@ if you just need to know the service is up.
   sequences at once.
 - **Protenix-v2**: AlphaFold3-family (Pairformer + atom diffusion), strong at
   antibody–antigen. Emits PAE/PDE and per-atom pLDDT. For affinity, use Boltz-2.
+- **OpenDDE**: one model family with two checkpoints, both protein-only with an
+  MSA on by default. `opendde` is the general protein-complex checkpoint;
+  `opendde-abag` selects the antibody-antigen checkpoint (co-fold an antibody
+  Fab heavy/light with its antigen). Its accuracy is verified to match the
+  reference OpenDDE implementation — strong on standard antibody-antigen
+  complexes, and it shares the reference's own limitation on some hard targets
+  (a checkpoint characteristic, not a port defect), so don't expect uniformly
+  high accuracy on every antibody-antigen input. No ligands, nucleic acids, or
+  affinity; for those use Boltz-2 or Protenix-v2.
 
 ### Embedding models
 
