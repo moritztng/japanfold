@@ -13,6 +13,7 @@ nav:
   - Embeddings: embeddings.md
   - Jobs: jobs.md
   - Models & limits: models-and-limits.md
+  - Accuracy: accuracy.md
   - Errors: errors.md
   - Examples: examples.md
   - The JapanFold skill: skill.md

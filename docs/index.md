@@ -60,6 +60,7 @@ Read the guides in order, or jump to what you need:
 - **[Embeddings](embeddings.md)**: ESMC protein embeddings (per-residue + pooled).
 - **[Jobs](jobs.md)**: polling, listing, cancel/delete, results, logs, artifacts, archive.
 - **[Models & limits](models-and-limits.md)**: the model list, every parameter, and the caps.
+- **[Accuracy](accuracy.md)**: how JapanFold's output compares to each model's official reference implementation.
 - **[Errors](errors.md)**: the problem+json shape and the status codes.
 - **[Examples](examples.md)**: end-to-end fold, co-fold+affinity and design in curl and Python.
 - **[The JapanFold skill](skill.md)**: fold and design straight from your AI agent.
